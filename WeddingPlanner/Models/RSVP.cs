@@ -9,4 +9,5 @@ public class RSVP
     public int RSVPID { get; set; }
     public int WeddingId { get; set; }
     public int UserId { get; set; }
+    public User? Guest { get; set; }
 }

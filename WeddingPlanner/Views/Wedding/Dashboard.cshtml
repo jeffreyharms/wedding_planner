@@ -13,10 +13,9 @@
             foreach (Wedding Wedding in Model)
             {
                 <tr>
-                    <td><a asp-action="ViewWedding" asp-route-weddingId="@Wedding.WeddingId">@Wedding.WedderOne " & " @Wedding.WedderTwo "'s Wedding"</a></td>
+                    <td><a asp-action="ViewWedding" asp-route-weddingId="@Wedding.WeddingId">@Wedding.WedderOne  &  @Wedding.WedderTwo 's Wedding</a></td>
                     <td>@Wedding.Date</td>
                     <td>@Wedding.Address</td>
-                    <td> " " </td>
                     @if (Wedding.Guests == null)
                     {
                         <td>0 Guests</td>

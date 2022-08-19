@@ -1,0 +1,20 @@
+@model Wedding
+
+<h1>@Model.WedderOne & @Model.WedderTwo 's Wedding</h1>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div class="container">
+                <ul>
+                    @if (Model.Guests != null) {
+                        @foreach (RSVP guest in Model.Guests)
+                        {
+                            <li>@guest.Guest.firstName @guest.Guest.lastName</li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

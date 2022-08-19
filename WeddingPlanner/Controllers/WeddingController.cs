@@ -70,5 +70,18 @@ public class WeddingController : Controller
         db.SaveChanges();
         return RedirectToAction("Dashboard", new {weddingId = weddingId});
     }
+    [HttpGet("/weddings/{weddingId}")]
+    public IActionResult ViewWedding(int weddingId)
+    {
+        Wedding? wedding = db.Wedding
+        .FirstOrDefault(wedding => wedding.WeddingId == weddingId);
+
+        if (wedding == null)
+        {
+            return RedirectToAction("Dashboard");
+        }
+
+        return View("ViewWedding", wedding);
+    }
 }
 
