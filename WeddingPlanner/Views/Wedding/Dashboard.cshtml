@@ -1,0 +1,59 @@
+@model List<Wedding>
+
+<div class="container">
+    <table>
+        <tr>
+        <th>Wedding</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Guests</th>
+        <th>Action</th>
+        </tr>
+        @{
+            foreach (Wedding Wedding in Model)
+            {
+                <tr>
+                    <td><a asp-action="ViewWedding" asp-route-weddingId="@Wedding.WeddingId">@Wedding.WedderOne " & " @Wedding.WedderTwo "'s Wedding"</a></td>
+                    <td>@Wedding.Date</td>
+                    <td>@Wedding.Address</td>
+                    <td> " " </td>
+                    @if (Wedding.Guests == null)
+                    {
+                        <td>0 Guests</td>
+                    }
+                    else
+                    {
+                        <td>@Wedding.Guests.Count()</td>
+                    }
+                    <td>
+                    @if (Wedding.UserId == Context.Session.GetInt32("UUID"))
+                    {
+                        <form asp-action="CancelWedding" asp-route-weddingID="@Wedding.WeddingId" method="POST">
+                            <button class="btn btn-danger">Cancel Wedding</button>
+                        </form>
+                    }
+                    else
+                    {
+                        if (Wedding.Guests != null)
+                        {
+                        <form asp-action="AddGuests" asp-route-weddingId="@Wedding.WeddingId" method="POST">
+                            <button class="btn btn-info">
+                                @if (Wedding.Guests.Any(u => u.UserId == Context.Session.GetInt32("UUID")))
+                                {
+                                    <span>Rescind RSVP</span>
+                                }
+                                else
+                                {
+                                    <span>RSVP</span>
+                                }
+                            </button>
+                        </form>
+                        }
+                    }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <a asp-action="PlanWedding" class="btn btn-primary">Plan New Wedding</a>
+</div>
